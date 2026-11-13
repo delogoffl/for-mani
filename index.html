@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0716">
+  <title>Happy Birthday 🎂</title>
+  <meta name="description" content="A little surprise made just for you.">
+  <meta property="og:title" content="A little surprise for you 🎁">
+  <meta property="og:description" content="Open it — it's made just for you.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎂</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Great+Vibes&family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="is-locked">
+
+  <!-- Living background -->
+  <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="floaters" id="floaters" aria-hidden="true"></div>
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="progress" id="progress" aria-hidden="true"></div>
+
+  <button class="music-btn" id="musicBtn" type="button" aria-label="Play or pause music" hidden>
+    <span></span><span></span><span></span><span></span>
+  </button>
+
+  <!-- ============ GATE ============ -->
+  <div class="gate" id="gate">
+    <div class="gate__inner">
+      <p class="gate__eyebrow" id="gateEyebrow">Psst…</p>
+      <h1 class="gate__title">I made something<br><em>just for you</em></h1>
+
+      <button class="gift" id="gift" type="button" aria-label="Open your gift">
+        <span class="gift__glow"></span>
+        <span class="gift__lid"><span class="gift__bow"></span></span>
+        <span class="gift__box"></span>
+        <i class="twinkle" style="--x:-18px;--y:20px;--d:0s"></i>
+        <i class="twinkle" style="--x:160px;--y:40px;--d:.6s"></i>
+        <i class="twinkle" style="--x:140px;--y:-10px;--d:1.2s"></i>
+        <i class="twinkle" style="--x:-4px;--y:120px;--d:1.8s"></i>
+      </button>
+
+      <p class="gate__hint" id="gateHint">Tap the gift to open ✨</p>
+
+      <div class="gate__countdown" id="gateCountdown" hidden>
+        <div><b data-g="d">0</b><span>days</span></div>
+        <div><b data-g="h">0</b><span>hrs</span></div>
+        <div><b data-g="m">0</b><span>min</span></div>
+        <div><b data-g="s">0</b><span>sec</span></div>
+      </div>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero" id="hero">
+      <div class="balloons" id="balloons" aria-hidden="true"></div>
+
+      <div class="hero__content">
+        <div class="avatar" id="avatar">
+          <span class="avatar__ring"></span>
+          <span class="avatar__inner"><img id="avatarImg" alt=""><span class="avatar__ph">🎂</span></span>
+        </div>
+
+        <svg class="hero__script" viewBox="0 0 800 170" role="img" aria-label="Happy Birthday">
+          <defs>
+            <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#fff1c4"/>
+              <stop offset=".45" stop-color="#ffd27a"/>
+              <stop offset="1" stop-color="#ff9ec9"/>
+            </linearGradient>
+          </defs>
+          <text x="50%" y="56%" text-anchor="middle" dominant-baseline="middle">Happy Birthday</text>
+        </svg>
+
+        <h1 class="hero__name" id="heroName"></h1>
+        <p class="hero__line" id="heroLine"></p>
+        <p class="hero__tip">Pop a balloon 🎈</p>
+      </div>
+
+      <a class="scroll-cue" href="#time" aria-label="Scroll down"><span></span></a>
+    </section>
+
+    <!-- ============ RIBBONS ============ -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee__band marquee__band--b"><div class="marquee__track marquee__track--rev" id="mqB"></div></div>
+      <div class="marquee__band marquee__band--a"><div class="marquee__track" id="mqA"></div></div>
+    </div>
+
+    <!-- ============ AGE ============ -->
+    <section class="section section--center" id="age">
+      <p class="kicker reveal" id="ageKicker">This year you're turning</p>
+      <div class="age__orb reveal" style="--d:.1s">
+        <span class="age__glow"></span>
+        <span class="age__pulse"></span>
+        <span class="age__pulse" style="animation-delay:1.2s"></span>
+        <span class="age__ring age__ring--1"></span>
+        <span class="age__ring age__ring--2"></span>
+        <div class="age__orbit">
+          <i style="--a:0deg">🎈</i><i style="--a:60deg">⭐</i><i style="--a:120deg">🎁</i>
+          <i style="--a:180deg">💖</i><i style="--a:240deg">🎉</i><i style="--a:300deg">✨</i>
+        </div>
+        <b class="age__num" id="ageNum">0</b>
+      </div>
+      <p class="lead reveal" style="--d:.2s" id="ageLine"></p>
+    </section>
+
+    <!-- ============ TIME ============ -->
+    <section class="section" id="time">
+      <p class="kicker reveal">Counting every moment</p>
+      <h2 class="title reveal" style="--d:.08s">Every second <em>counts</em></h2>
+
+      <div class="glass card reveal" style="--d:.16s">
+        <div id="cdWrap">
+          <p class="card__label" id="cdLabel">Your birthday is in</p>
+          <div class="units units--4">
+            <div class="unit"><b data-c="d">0</b><span>days</span></div>
+            <div class="unit"><b data-c="h">0</b><span>hrs</span></div>
+            <div class="unit"><b data-c="m">0</b><span>min</span></div>
+            <div class="unit"><b data-c="s">0</b><span>sec</span></div>
+          </div>
+        </div>
+        <div class="today" id="cdToday" hidden>
+          <span class="today__emoji">🎉</span>
+          <p class="today__big">It's today!</p>
+          <p class="today__sub" id="todaySub"></p>
+        </div>
+      </div>
+
+      <div class="glass card reveal" style="--d:.24s">
+        <p class="card__label">You've been making this world brighter for</p>
+        <div class="units units--5">
+          <div class="unit"><b data-l="y">0</b><span>yrs</span></div>
+          <div class="unit"><b data-l="d">0</b><span>days</span></div>
+          <div class="unit"><b data-l="h">0</b><span>hrs</span></div>
+          <div class="unit"><b data-l="m">0</b><span>min</span></div>
+          <div class="unit"><b data-l="s">0</b><span>sec</span></div>
+        </div>
+        <p class="beats">≈ <b id="beats">0</b> heartbeats &amp; counting <span class="beat-heart">❤</span></p>
+      </div>
+    </section>
+
+    <!-- ============ CAKE ============ -->
+    <section class="section section--center" id="cake-section">
+      <p class="kicker reveal">Close your eyes</p>
+      <h2 class="title reveal" style="--d:.08s">Make a <em>wish</em></h2>
+      <p class="lead reveal" style="--d:.16s">Tap each candle to blow it out 🕯️</p>
+
+      <div class="cake reveal" id="cake" style="--d:.24s">
+        <div class="cake__glow"></div>
+        <div class="plate"></div>
+        <div class="tier tier--base"></div>
+        <div class="tier tier--mid"></div>
+        <div class="tier tier--top"></div>
+        <div class="candles" id="candles"></div>
+      </div>
+
+      <div class="cake-ui reveal" style="--d:.3s">
+        <p class="wish-msg" id="wishMsg">Your wish is on its way ✨</p>
+        <button class="btn btn--ghost" id="relightBtn" type="button" hidden>🕯️ Light them again</button>
+      </div>
+    </section>
+
+    <!-- ============ GALLERY ============ -->
+    <section class="section section--center" id="moments">
+      <p class="kicker reveal">Little moments, big memories</p>
+      <h2 class="title reveal" style="--d:.08s">Our <em>moments</em></h2>
+      <p class="lead reveal" style="--d:.16s">Swipe the photos ←→</p>
+
+      <div class="stack reveal" id="stack" style="--d:.24s"></div>
+
+      <div class="stack-ui reveal" style="--d:.3s">
+        <button class="round-btn" id="prevBtn" type="button" aria-label="Previous photo">‹</button>
+        <span id="stackCount">1 / 1</span>
+        <button class="round-btn" id="nextBtn" type="button" aria-label="Next photo">›</button>
+      </div>
+    </section>
+
+    <!-- ============ REASONS ============ -->
+    <section class="section section--center" id="reasons-section">
+      <p class="kicker reveal">Just a few of them</p>
+      <h2 class="title reveal" style="--d:.08s">Things I love <em>about you</em></h2>
+      <div class="reasons" id="reasons"></div>
+    </section>
+
+    <!-- ============ LETTER ============ -->
+    <section class="section section--center" id="letter-section">
+      <p class="kicker reveal">Sealed with love</p>
+      <h2 class="title reveal" style="--d:.08s">A letter <em>for you</em></h2>
+
+      <div class="env-wrap reveal" id="envWrap" style="--d:.16s">
+        <button class="envelope" id="envelope" type="button" aria-label="Open the letter">
+          <span class="env__back"></span>
+          <span class="env__paper">For you 💌</span>
+          <span class="env__front"></span>
+          <span class="env__flap"></span>
+          <span class="env__seal">❤</span>
+        </button>
+        <p class="lead">Tap to open</p>
+      </div>
+
+      <article class="letter" id="letter" hidden>
+        <p class="letter__body" id="letterBody"></p>
+        <p class="letter__sign" id="letterSign"></p>
+      </article>
+    </section>
+
+    <!-- ============ LANTERNS ============ -->
+    <section class="section section--center" id="wishes">
+      <p class="kicker reveal">Light up the night</p>
+      <h2 class="title reveal" style="--d:.08s">Send a wish <em>to the sky</em></h2>
+      <p class="lead reveal" style="--d:.16s">Every lantern carries a wish for you 🏮</p>
+      <div class="lantern-dock reveal" style="--d:.24s">
+        <span class="lantern lantern--idle"><span class="lantern__body"></span></span>
+      </div>
+      <button class="btn reveal" id="lanternBtn" type="button" style="--d:.3s">🏮 Release a lantern</button>
+      <p class="wish-count" id="wishCount"></p>
+    </section>
+
+    <!-- ============ FINALE ============ -->
+    <section class="finale" id="finale">
+      <p class="kicker reveal">One last thing</p>
+      <h2 class="finale__title reveal" style="--d:.08s">
+        <span class="finale__script">Happy Birthday</span>
+        <span class="finale__name" id="finaleName"></span>
+      </h2>
+      <p class="lead reveal" style="--d:.16s">May this year be your most beautiful one yet.</p>
+      <button class="btn btn--big reveal" id="celebrateBtn" type="button" style="--d:.24s">🎉 Celebrate again</button>
+      <a class="to-top reveal" href="#hero" style="--d:.3s">Back to the top ↑</a>
+      <footer class="footer">Made with <span class="beat-heart">❤</span> by <span id="fromName"></span></footer>
+    </section>
+  </main>
+
+  <noscript><p style="padding:40px;text-align:center;color:#fff">Please enable JavaScript to see your surprise 💖</p></noscript>
+
+  <script src="js/config.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
